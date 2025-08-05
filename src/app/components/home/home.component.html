@@ -1,25 +1,56 @@
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>{{ username }}'s Passwords</h2>
-    <button (click)="toggleTheme()" class="btn btn-outline-secondary" [title]="isDarkTheme ? 'Light Tema' : 'Dark Tema'">
-      <i [class]="isDarkTheme ? 'fa fa-sun' : 'fa fa-moon'"></i>
-      {{ isDarkTheme ? 'Light' : 'Dark' }}
-    </button>
+    <h2>{{ username }}'s {{ 'passwords' | translate }}</h2>
+    <div class="d-flex align-items-center gap-2">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fa fa-language me-2"></i>{{ getCurrentLanguage().flag }} {{ getCurrentLanguage().name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let lang of languages">
+            <a class="dropdown-item" href="#" (click)="changeLanguage(lang.code); $event.preventDefault()">
+              {{ lang.flag }} {{ lang.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button (click)="toggleTheme()" class="btn btn-outline-secondary" [title]="isDarkTheme ? ('light' | translate) + ' ' + ('theme' | translate) : ('dark' | translate) + ' ' + ('theme' | translate)">
+        <i [class]="isDarkTheme ? 'fa fa-sun me-1' : 'fa fa-moon me-1'"></i>
+        {{ isDarkTheme ? ('light' | translate) : ('dark' | translate) }}
+      </button>
+      <div class="dropdown">
+        <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fa fa-cookie-bite"></i> {{ 'cookies' | translate }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" (click)="showCookies(); $event.preventDefault()">
+            <i class="fa fa-info-circle me-2"></i>{{ 'cookieInfo' | translate }}
+          </a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" (click)="clearCookies(); $event.preventDefault()">
+            <i class="fa fa-trash me-2"></i>{{ 'clearCookies' | translate }}
+          </a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-md-2">
       <button (click)="createNewGroup()" class="btn btn-primary w-100">
-        <i class="fa fa-plus me-1"></i>Grup Ekle
+        <i class="fa fa-plus me-1"></i>{{ 'addGroup' | translate }}
       </button>
     </div>
 
     <div class="col-md-10">
       <div class="input-group">
+        <span class="input-group-text">
+          <i class="fa fa-search"></i>
+        </span>
         <input 
           type="text" 
           class="form-control" 
-          placeholder="Grup ara..." 
+          [placeholder]="'searchPlaceholder' | translate" 
           [(ngModel)]="searchTerm">
       </div>
     </div>
@@ -30,13 +61,13 @@
       <span>{{ group.name }}</span>
       <div>
         <button (click)="addPass(group)" class="btn btn-sm btn-info me-2">
-          <i class="fa fa-plus me-1"></i>Add Pass in {{ group.name }} Group
+          <i class="fa fa-plus me-1"></i>{{ 'addPassInGroup' | translate }}
         </button>
-        <button (click)="editGroup(group)" class="btn btn-sm btn-warning me-2" title="Grubu Güncelle">
-          <i class="fa fa-edit me-1"></i>Güncelle
+        <button (click)="editGroup(group)" class="btn btn-sm btn-warning me-2" [title]="'updateGroup' | translate">
+          <i class="fa fa-edit me-1"></i>{{ 'update' | translate }}
         </button>
-        <button (click)="deleteGroup(group)" class="btn btn-sm btn-danger" title="Grubu Sil">
-          <i class="fa fa-trash me-1"></i>Sil
+        <button (click)="deleteGroup(group)" class="btn btn-sm btn-danger" [title]="'deleteGroup' | translate">
+          <i class="fa fa-trash me-1"></i>{{ 'delete' | translate }}
         </button>
       </div>
     </div>
@@ -44,10 +75,10 @@
     <table class="table mb-0 table-responsive">
       <thead>
         <tr>
-          <th style="width: 20%;">Pass Name</th>
-          <th style="width: 25%;">Url</th>
-          <th style="width: 30%;">Pass</th>
-          <th style="width: 25%;">Tools</th>
+          <th style="width: 20%;">{{ 'passName' | translate }}</th>
+          <th style="width: 25%;">{{ 'url' | translate }}</th>
+          <th style="width: 30%;">{{ 'password' | translate }}</th>
+          <th style="width: 25%;">{{ 'tools' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -57,19 +88,19 @@
           <td style="width: 30%;">
             <div class="d-flex align-items-center">
               <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly class="form-control me-2">
-              <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary" [title]="pass.show ? 'Gizle' : 'Göster'">
+              <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary" [title]="pass.show ? ('hide' | translate) : ('show' | translate)">
                 <i [class]="pass.show ? 'fa fa-eye-slash me-1' : 'fa fa-eye me-1'"></i>
-                {{ pass.show ? 'Gizle' : 'Göster' }}
+                {{ pass.show ? ('hide' | translate) : ('show' | translate) }}
               </button>
             </div>
           </td>
           <td style="width: 25%;">
             <div class="d-flex flex-wrap gap-1">
-              <button (click)="editPass(pass)" class="btn btn-sm btn-warning" title="Güncelle">
-                <i class="fa fa-edit me-1"></i>Güncelle
+              <button (click)="editPass(pass)" class="btn btn-sm btn-warning" [title]="'update' | translate">
+                <i class="fa fa-edit me-1"></i>{{ 'update' | translate }}
               </button>
-              <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger" title="Sil">
-                <i class="fa fa-trash me-1"></i>Sil
+              <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger" [title]="'delete' | translate">
+                <i class="fa fa-trash me-1"></i>{{ 'delete' | translate }}
               </button>
             </div>
           </td>

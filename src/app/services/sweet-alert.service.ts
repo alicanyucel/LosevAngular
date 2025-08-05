@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { I18nService } from './i18n.service';
 
 declare var Swal: any;
 
@@ -6,6 +7,7 @@ declare var Swal: any;
   providedIn: 'root'
 })
 export class SweetAlertService {
+  private i18n = inject(I18nService);
 
   constructor() { }
   success(title: string, text?: string) {
@@ -111,11 +113,11 @@ export class SweetAlertService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Kaydet',
-      cancelButtonText: 'İptal',
+      confirmButtonText: this.i18n.translate('save'),
+      cancelButtonText: this.i18n.translate('cancel'),
       inputValidator: (value: any) => {
         if (!value) {
-          return 'Bu alan boş bırakılamaz!'
+          return this.i18n.translate('fieldRequired');
         }
         return null;
       }

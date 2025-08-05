@@ -29,6 +29,7 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 ### 🎨 Kullanıcı Arayüzü
 - **Responsive Tasarım:** Tüm cihazlarda mükemmel görünüm
 - **Dark/Light Tema:** İki tema seçeneği ile kişiselleştirme
+- **Çoklu Dil Desteği:** Türkçe/İngilizce dil paketi
 - **Modern UI/UX:** Bootstrap 5 ile çağdaş tasarım
 - **Interactive Elements:** Smooth animasyonlar ve hover efektleri
 
