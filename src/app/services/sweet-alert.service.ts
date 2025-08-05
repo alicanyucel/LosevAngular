@@ -8,8 +8,6 @@ declare var Swal: any;
 export class SweetAlertService {
 
   constructor() { }
-
-  // Success alert
   success(title: string, text?: string) {
     return Swal.fire({
       title: title,
@@ -19,8 +17,6 @@ export class SweetAlertService {
       confirmButtonText: 'Tamam'
     });
   }
-
-  // Error alert
   error(title: string, text?: string) {
     return Swal.fire({
       title: title,
@@ -31,7 +27,6 @@ export class SweetAlertService {
     });
   }
 
-  // Warning alert
   warning(title: string, text?: string) {
     return Swal.fire({
       title: title,
@@ -42,7 +37,6 @@ export class SweetAlertService {
     });
   }
 
-  // Info alert
   info(title: string, text?: string) {
     return Swal.fire({
       title: title,
@@ -53,7 +47,6 @@ export class SweetAlertService {
     });
   }
 
-  // Confirmation dialog
   confirm(title: string, text?: string, confirmButtonText: string = 'Evet', cancelButtonText: string = 'Hayır') {
     return Swal.fire({
       title: title,
@@ -67,7 +60,6 @@ export class SweetAlertService {
     });
   }
 
-  // Delete confirmation
   deleteConfirm(title: string = 'Silmek istediğinizden emin misiniz?', text?: string) {
     return Swal.fire({
       title: title,
@@ -81,7 +73,6 @@ export class SweetAlertService {
     });
   }
 
-  // Toast notification
   toast(title: string, icon: 'success' | 'error' | 'warning' | 'info' = 'success') {
     return Swal.fire({
       toast: true,
@@ -94,7 +85,6 @@ export class SweetAlertService {
     });
   }
 
-  // Loading alert
   loading(title: string = 'Yükleniyor...', text?: string) {
     return Swal.fire({
       title: title,
@@ -108,7 +98,6 @@ export class SweetAlertService {
     });
   }
 
-  // Close any open dialog
   close() {
     Swal.close();
   }
