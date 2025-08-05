@@ -9,6 +9,7 @@ import { CookieService } from '../../services/cookie.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { PasswordStrengthComponent } from '../password-strength/password-strength.component';
+import { CsvService, PasswordData } from '../../services/csv.service';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +22,14 @@ export class HomeComponent {
   private i18n = inject(I18nService);
   private cookieService = inject(CookieService);
   private breadcrumbService = inject(BreadcrumbService);
+  private csvService = inject(CsvService);
   
   username = 'Test';
   searchTerm = '';
   isDarkTheme = false;
   languages = LANGUAGES;
   currentPassword = '';
-  showTestPassword = false; // Test parolasını göster/gizle
+  showTestPassword = false; 
 
   constructor() {
 
@@ -293,5 +295,87 @@ export class HomeComponent {
         this.sweetAlert.toast(this.translate('cookiesCleared'), 'success');
       }
     });
+  }
+
+  // CSV Import/Export Methods
+  exportToCSV() {
+    if (this.groups.length === 0) {
+      this.sweetAlert.toast('No passwords to export', 'warning');
+      return;
+    }
+
+    try {
+      const filename = `passwords_${new Date().toISOString().split('T')[0]}`;
+      this.csvService.exportToCSV(this.groups, filename);
+      this.sweetAlert.toast(this.translate('csvExported'), 'success');
+    } catch (error) {
+      console.error('Export error:', error);
+      this.sweetAlert.toast(this.translate('csvImportError'), 'error');
+    }
+  }
+
+  importFromCSV() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.csv';
+    input.style.display = 'none';
+
+    input.onchange = (event: any) => {
+      const file = event.target.files[0];
+      if (!file) {
+        this.sweetAlert.toast(this.translate('csvFileNotSelected'), 'warning');
+        return;
+      }
+
+      if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+        this.sweetAlert.toast(this.translate('csvInvalidFormat'), 'error');
+        return;
+      }
+
+      this.sweetAlert.confirm(
+        this.translate('csvImportConfirm'),
+        this.translate('csvImportMessage'),
+        this.translate('save'),
+        this.translate('cancel')
+      ).then((result: any) => {
+        if (result.isConfirmed) {
+          this.processCSVImport(file);
+        }
+      });
+    };
+
+    document.body.appendChild(input);
+    input.click();
+    document.body.removeChild(input);
+  }
+
+  private async processCSVImport(file: File) {
+    try {
+      const importedData: PasswordData[] = await this.csvService.importFromCSV(file);
+      
+      const validation = this.csvService.validateCSVStructure(importedData);
+      if (!validation.isValid) {
+        let errorMessage = this.translate('csvValidationError') + ':\n\n';
+        validation.errors.forEach(error => {
+          errorMessage += `• ${error}\n`;
+        });
+        this.sweetAlert.error(this.translate('csvImportError'), errorMessage);
+        return;
+      }
+
+      if (importedData.length === 0) {
+        this.sweetAlert.toast('CSV file is empty', 'warning');
+        return;
+      }
+      this.groups = this.csvService.mergeImportedData(this.groups, importedData);
+      
+      this.sweetAlert.toast(
+        `${this.translate('csvImported')} (${importedData.length} ${this.translate('passwords')})`,
+        'success'
+      );
+    } catch (error) {
+      console.error('Import error:', error);
+      this.sweetAlert.toast(this.translate('csvImportError'), 'error');
+    }
   }
 }

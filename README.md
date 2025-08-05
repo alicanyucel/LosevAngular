@@ -26,13 +26,16 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - **Güvenli Şifre Saklama:** Şifreler gizli formatta saklanır ve isteğe bağlı gösterilir
 - **CRUD İşlemleri:** Şifre ekleme, düzenleme, silme ve görüntüleme
 - **Arama ve Filtreleme:** Grup adına göre gerçek zamanlı arama
+- **🔒 Şifre Gücü Kontrolü:** Gerçek zamanlı şifre gücü analizi ve öneriler
+- **🎲 Güçlü Şifre Üreteci:** Otomatik güvenli şifre oluşturma (12+ karakter)
+- **📊 CSV İçe/Dışa Aktarma:** Şifrelerinizi CSV formatında yedekleme ve geri yükleme
 
 ### 🎨 Kullanıcı Arayüzü
 - **Responsive Tasarım:** Tüm cihazlarda mükemmel görünüm
 - **Dark/Light Tema:** İki tema seçeneği ile kişiselleştirme
 - **Çoklu Dil Desteği:** Türkçe/İngilizce dil paketi
 - **Modern UI/UX:** Bootstrap 5 ile çağdaş tasarım
-- **FontAwesome İkonları:** 50+ profesyonel ikon kullanımı
+- **FontAwesome İkonları:** 60+ profesyonel ikon kullanımı
   - 🔍 Arama ikonu (search)
   - 🌐 Dil seçici ikonu (language)
   - 🌙☀️ Tema değiştirme ikonları (moon/sun)
@@ -41,6 +44,11 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
   - ✏️ Düzenleme ikonları (edit)
   - 🗑️ Silme ikonları (trash)
   - 👁️ Göster/Gizle ikonları (eye/eye-slash)
+  - 📥📤 CSV İçe/Dışa Aktarma ikonları (download/upload)
+  - 🛡️ Güvenlik ikonları (shield-alt)
+  - 💡 Öneri ikonu (lightbulb)
+  - 🎲 Şifre üretici ikonu (magic)
+  - 🏠 Ana sayfa ikonu (home)
 - **Breadcrumb Navigasyon:** Sayfa konumu ve geçmiş takibi
 - **Interactive Elements:** Smooth animasyonlar ve hover efektleri
 
@@ -49,6 +57,9 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - **Route Guard:** Korumalı sayfalar
 - **SweetAlert Integration:** Güvenli onay dialokları
 - **Input Validation:** Form doğrulama ve hata kontrolü
+- **🔐 Şifre Gücü Analizi:** Gerçek zamanlı güvenlik skoru hesaplama
+- **📋 Güvenlik Önerileri:** Zayıf şifreler için iyileştirme önerileri
+- **🎯 Güvenlik Kriterleri:** Büyük/küçük harf, sayı, özel karakter kontrolü
 
 ### 🚀 Performans ve Optimizasyon
 - **Lazy Loading:** Sayfa yükleme optimizasyonu
@@ -71,9 +82,13 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
   - Düğme ikonları (edit, delete, add, show/hide)
   - UI ikonları (search, language, theme, cookie)
   - Navigasyon ikonları (dropdown, toggle)
+  - Güvenlik ikonları (shield-alt, lock, magic)
+  - Import/Export ikonları (download, upload)
 - **SweetAlert2** - Modern alert dialokları
 - **Flexi Toast** - Bildirim sistemi
 - **Flexi Button** - Gelişmiş buton komponenti
+- **CSV Parser** - Dosya içe/dışa aktarma sistemi
+- **Password Strength Meter** - Şifre gücü analiz sistemi
 
 ### Geliştirme Araçları
 - **Angular CLI 19+** - Proje yönetimi
@@ -130,11 +145,26 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - **Şifre Ekle:** Gruplara yeni şifreler ekleyin
 - **Şifre Görüntüle:** Şifreleri göster/gizle butonuyla kontrol edin
 - **Şifre Düzenle:** Mevcut şifre bilgilerini güncelleyin
-- **Şifre Sil:** İstenmyeen şifreleri kaldırın
+- **Şifre Sil:** İstenmeyen şifreleri kaldırın
+- **🔒 Şifre Gücü Kontrolü:** Yeni şifre girerken gerçek zamanlı güvenlik analizi
+- **🎲 Güçlü Şifre Üretimi:** "Şifre Üret" butonu ile 12+ karakter güvenli şifre oluşturma
+- **📊 Güvenlik Önerileri:** Zayıf şifreler için otomatik iyileştirme önerileri
+
+#### 📁 CSV İçe/Dışa Aktarma
+- **📤 CSV Dışa Aktarma:** Tüm şifrelerinizi CSV formatında bilgisayarınıza kaydedin
+- **📥 CSV İçe Aktarma:** Dışa aktardığınız veya başka kaynaklardan aldığınız CSV dosyalarını sisteme yükleyin
+- **🔄 Otomatik Birleştirme:** İçe aktarılan veriler mevcut gruplarla akıllıca birleştirilir
+- **✅ Format Doğrulama:** CSV dosyalarının geçerliliği otomatik kontrol edilir
+- **📋 CSV Format:** Group, Name, URL, Password sütunları ile standart format
 
 #### Tema Değiştirme
 - Sağ üst köşedeki tema butonuyla Dark/Light tema arasında geçiş yapın
 - Tema tercihiniz tarayıcıda kaydedilir
+
+#### 🍪 Çerez Yönetimi
+- **Çerez Görüntüleme:** Tarayıcınızdaki çerezleri listeleyin
+- **Çerez Temizleme:** Tüm çerezleri güvenli bir şekilde silin
+- **Çerez Bilgisi:** Detaylı çerez içerik görüntüleme
 
 ## 🐳 Docker
 
@@ -168,20 +198,27 @@ src/
 │   │   ├── login/          # Giriş sayfası
 │   │   ├── breadcrumb/     # Breadcrumb navigasyon
 │   │   ├── footer/         # Footer bileşeni
+│   │   ├── password-strength/ # Şifre gücü kontrolü bileşeni
 │   │   └── not-found/      # 404 sayfası
 │   ├── guards/             # Route korumaları
 │   │   └── auth.guard.ts   # Kimlik doğrulama guard'ı
 │   ├── interceptor/        # HTTP interceptor'ları
 │   ├── models/             # TypeScript modelleri
 │   ├── pipes/              # Custom pipe'lar
-│   │   ├── search-group.pipe.ts
-│   │   ├── search-user.pipe.ts
-│   │   └── enum-value.pipe.ts
+│   │   ├── search-group.pipe.ts     # Grup arama filtresi
+│   │   ├── search-user.pipe.ts      # Kullanıcı arama filtresi
+│   │   ├── translate.pipe.ts        # Çoklu dil çeviri sistemi
+│   │   └── enum-value.pipe.ts       # Enum değer dönüştürücü
 │   ├── services/           # Business logic servisleri
-│   │   ├── sweet-alert.service.ts
-│   │   ├── http.service.ts
-│   │   ├── loading.service.ts
-│   │   └── breadcrumb.service.ts
+│   │   ├── sweet-alert.service.ts   # Dialog yönetimi
+│   │   ├── http.service.ts          # HTTP işlemleri
+│   │   ├── loading.service.ts       # Yükleme durumu
+│   │   ├── breadcrumb.service.ts    # Breadcrumb navigasyon
+│   │   ├── i18n.service.ts          # Çoklu dil sistemi
+│   │   ├── cookie.service.ts        # Çerez yönetimi
+│   │   ├── csv.service.ts           # CSV işlemleri
+│   │   ├── password-strength.service.ts # Şifre gücü analizi
+│   │   └── error-handler.service.ts # Hata yönetimi
 │   ├── directive/          # Custom directive'ler
 │   └── constants/          # Uygulama sabitleri
 ├── public/                 # Statik dosyalar
@@ -192,12 +229,72 @@ src/
 
 ## 🎯 Özellik Detayları
 
+### 🔒 Şifre Gücü Kontrolü Sistemi
+- **Gerçek Zamanlı Analiz:** Şifre yazarken anlık güvenlik skoru hesaplama
+- **Görsel Geri Bildirim:** Renkli progress bar ile güç seviyesi gösterimi
+- **Detaylı Öneriler:** Zayıf şifreler için spesifik iyileştirme önerileri
+- **Güvenlik Kriterleri:**
+  - Minimum 8 karakter uzunluğu
+  - Büyük ve küçük harf kombinasyonu
+  - Sayısal karakter kontrolü
+  - Özel karakter gerekliliği
+  - Yaygın şifre kontrolü
+- **Otomatik Şifre Üreteci:** 12+ karakter güvenli şifre oluşturma
+- **Skor Sistemi:** 0-100 arası güvenlik puanlaması
+- **Renk Kodları:**
+  - 🔴 Zayıf (0-25): Kırmızı
+  - 🟡 Orta (26-50): Sarı
+  - 🟠 İyi (51-75): Turuncu
+  - 🟢 Güçlü (76-100): Yeşil
+
+### 📊 CSV İçe/Dışa Aktarma Sistemi
+- **Güvenli Dışa Aktarma:** 
+  - UTF-8 encoding ile Türkçe karakter desteği
+  - BOM (Byte Order Mark) ile Excel uyumluluğu
+  - Özel karakter escape sistemi
+  - Tarih damgalı dosya adlandırma
+- **Akıllı İçe Aktarma:**
+  - CSV format doğrulaması
+  - Duplicate kontrol sistemi
+  - Otomatik grup birleştirme
+  - Hata raporlama sistemi
+- **CSV Format Standardı:**
+  ```csv
+  Group,Name,URL,Password
+  "Web","Gmail","https://gmail.com","SecurePass123!"
+  "Games","Steam","https://steam.com","GamePass456@"
+  ```
+- **Dosya Güvenliği:**
+  - Client-side işleme (veriler sunucuya gönderilmez)
+  - Blob API ile güvenli indirme
+  - FileReader API ile güvenli okuma
+
 ### SweetAlert Entegrasyonu
 - Modern ve kullanıcı dostu dialog'lar
 - Türkçe dil desteği
 - Çeşitli dialog türleri (input, confirm, delete, toast)
 - Loading states ile kullanıcı geri bildirimi
 - FontAwesome ikonları ile gelişmiş buton tasarımı
+
+### 🍪 Çerez Yönetim Sistemi
+- **Çerez Görüntüleme:** Tarayıcıdaki tüm çerezleri listeleme
+- **Detaylı Bilgi:** Çerez adı, değeri ve son kullanma tarihi
+- **Güvenli Temizleme:** Tüm çerezleri güvenli silme
+- **Uygulama Çerezleri:**
+  - `user_theme`: Tema tercihi (dark/light)
+  - `user_language`: Dil tercihi (tr/en)
+  - `user_settings`: Uygulama ayarları
+
+### 🌐 Çoklu Dil Sistemi (i18n)
+- **Desteklenen Diller:** Türkçe 🇹🇷, İngilizce 🇺🇸
+- **Kapsamlı Çeviri:** 100+ çeviri anahtarı
+- **Dinamik Dil Değiştirme:** Sayfa yenileme gerektirmeden
+- **Persistent Storage:** Seçilen dil tercihi kalıcı saklama
+- **Çeviri Kategorileri:**
+  - UI Elemanları (butonlar, etiketler)
+  - Dialog Mesajları (uyarılar, onaylar)
+  - Hata Mesajları (doğrulama, sistem)
+  - Bilgi Mesajları (başarı, bildirim)
 
 ### Breadcrumb Navigasyon
 - Otomatik sayfa konumu takibi
@@ -292,6 +389,14 @@ FontAwesome CDN üzerinden index.html'e entegre edilmiştir:
 - `fa fa-edit` - Düzenleme işlemleri
 - `fa fa-trash` - Silme işlemleri
 - `fa fa-eye` / `fa fa-eye-slash` - Şifre göster/gizle
+- `fa fa-download` - CSV dışa aktarma
+- `fa fa-upload` - CSV içe aktarma
+
+#### 🔒 Güvenlik İkonları
+- `fa fa-shield-alt` - Şifre gücü göstergesi
+- `fa fa-magic` - Şifre üretici
+- `fa fa-lightbulb` - Güvenlik önerileri
+- `fa fa-lock` - Güvenlik durumu
 
 #### ℹ️ Bilgi İkonları
 - `fa fa-info-circle` - Çerez bilgisi
