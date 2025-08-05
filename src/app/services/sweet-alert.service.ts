@@ -16,7 +16,8 @@ export class SweetAlertService {
       text: text,
       icon: 'success',
       confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Tamam'
+      confirmButtonText: '<i class="fa fa-check me-2"></i>Tamam',
+      allowHtml: true
     });
   }
   error(title: string, text?: string) {
@@ -25,7 +26,8 @@ export class SweetAlertService {
       text: text,
       icon: 'error',
       confirmButtonColor: '#d33',
-      confirmButtonText: 'Tamam'
+      confirmButtonText: '<i class="fa fa-times me-2"></i>Tamam',
+      allowHtml: true
     });
   }
 
@@ -35,7 +37,8 @@ export class SweetAlertService {
       text: text,
       icon: 'warning',
       confirmButtonColor: '#f39c12',
-      confirmButtonText: 'Tamam'
+      confirmButtonText: '<i class="fa fa-exclamation-triangle me-2"></i>Tamam',
+      allowHtml: true
     });
   }
 
@@ -45,7 +48,8 @@ export class SweetAlertService {
       text: text,
       icon: 'info',
       confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Tamam'
+      confirmButtonText: '<i class="fa fa-info-circle me-2"></i>Tamam',
+      allowHtml: true
     });
   }
 
@@ -57,8 +61,9 @@ export class SweetAlertService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: confirmButtonText,
-      cancelButtonText: cancelButtonText
+      confirmButtonText: `<i class="fa fa-check me-2"></i>${confirmButtonText}`,
+      cancelButtonText: `<i class="fa fa-times me-2"></i>${cancelButtonText}`,
+      allowHtml: true
     });
   }
 
@@ -70,8 +75,9 @@ export class SweetAlertService {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Evet, Sil!',
-      cancelButtonText: 'İptal'
+      confirmButtonText: '<i class="fa fa-trash me-2"></i>Evet, Sil!',
+      cancelButtonText: '<i class="fa fa-times me-2"></i>İptal',
+      allowHtml: true
     });
   }
 
@@ -113,8 +119,9 @@ export class SweetAlertService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: this.i18n.translate('save'),
-      cancelButtonText: this.i18n.translate('cancel'),
+      confirmButtonText: `<i class="fa fa-save me-2"></i>${this.i18n.translate('save')}`,
+      cancelButtonText: `<i class="fa fa-times me-2"></i>${this.i18n.translate('cancel')}`,
+      allowHtml: true,
       inputValidator: (value: any) => {
         if (!value) {
           return this.i18n.translate('fieldRequired');

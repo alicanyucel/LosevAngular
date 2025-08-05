@@ -10,7 +10,7 @@ export class BreadcrumbService {
   reset(){
     this.data.set([
       {
-        name: "Ana Sayfa",
+        name: "home",
         routerLink: "/",
         icon: "home"
       }

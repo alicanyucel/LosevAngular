@@ -41,6 +41,7 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
   - ✏️ Düzenleme ikonları (edit)
   - 🗑️ Silme ikonları (trash)
   - 👁️ Göster/Gizle ikonları (eye/eye-slash)
+- **Breadcrumb Navigasyon:** Sayfa konumu ve geçmiş takibi
 - **Interactive Elements:** Smooth animasyonlar ve hover efektleri
 
 ### 🛡️ Güvenlik ve Kimlik Doğrulama
@@ -165,6 +166,7 @@ src/
 │   ├── components/          # UI Bileşenleri
 │   │   ├── home/           # Ana sayfa
 │   │   ├── login/          # Giriş sayfası
+│   │   ├── breadcrumb/     # Breadcrumb navigasyon
 │   │   ├── footer/         # Footer bileşeni
 │   │   └── not-found/      # 404 sayfası
 │   ├── guards/             # Route korumaları
@@ -195,6 +197,15 @@ src/
 - Türkçe dil desteği
 - Çeşitli dialog türleri (input, confirm, delete, toast)
 - Loading states ile kullanıcı geri bildirimi
+- FontAwesome ikonları ile gelişmiş buton tasarımı
+
+### Breadcrumb Navigasyon
+- Otomatik sayfa konumu takibi
+- Çoklu dil desteği (TR/EN)
+- FontAwesome ikonları ile görsel zenginlik
+- Dark/Light tema desteği
+- Responsive tasarım
+- Router entegrasyonu
 
 ### Responsive Tasarım
 - Mobile-first yaklaşım

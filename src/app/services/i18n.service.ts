@@ -95,7 +95,10 @@ export class I18nService {
       'cookieName': 'Çerez Adı',
       'cookieValue': 'Çerez Değeri',
       'noCookiesFound': 'Hiç çerez bulunamadı',
-      'close': 'Kapat'
+      'close': 'Kapat',
+      
+      // Breadcrumb
+      'home': 'Ana Sayfa'
     },
     en: {
       // Header
@@ -172,7 +175,10 @@ export class I18nService {
       'cookieName': 'Cookie Name',
       'cookieValue': 'Cookie Value',
       'noCookiesFound': 'No cookies found',
-      'close': 'Close'
+      'close': 'Close',
+      
+      // Breadcrumb
+      'home': 'Home'
     }
   };
 

@@ -6,17 +6,20 @@ import { SearchGroupPipe } from '../../pipes/search-group.pipe';
 import { I18nService, LANGUAGES, LanguageData } from '../../services/i18n.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { CookieService } from '../../services/cookie.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, FormsModule, SearchGroupPipe, TranslatePipe]
+  imports: [CommonModule, FormsModule, SearchGroupPipe, TranslatePipe, BreadcrumbComponent]
 })
 export class HomeComponent {
   private sweetAlert = inject(SweetAlertService);
   private i18n = inject(I18nService);
   private cookieService = inject(CookieService);
+  private breadcrumbService = inject(BreadcrumbService);
   
   username = 'Test';
   searchTerm = '';
@@ -24,6 +27,10 @@ export class HomeComponent {
   languages = LANGUAGES;
 
   constructor() {
+    // Breadcrumb'u ayarla
+    this.breadcrumbService.reset();
+    this.breadcrumbService.add('passwords', '/home', 'key');
+    
     // Cookie'den tema durumunu oku, yoksa LocalStorage'dan oku
     const savedThemeFromCookie = this.cookieService.getCookie('user_theme');
     const savedThemeFromStorage = localStorage.getItem('theme');
