@@ -1,6 +1,6 @@
-export interface ResultModel<T>{
+export class ResultModel<T> {
     data?: T;
-    errorMessages?: string[];
-    statusCode: number;
-    isSuccessful: boolean;
+    isSuccessful: boolean = false;
+    errorMessages: string[] = [];
+    successMessage: string = "";
 }

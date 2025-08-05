@@ -17,7 +17,11 @@ export const routes: Routes = [
     loadComponent: () => import('./components/home/home.component')
   },
   {
+    path: 'not-found',
+    loadComponent: () => import('./components/not-found/not-found.component')
+  },
+  {
     path: '**',
-    redirectTo: '/login'
+    redirectTo: '/not-found'
   } 
 ];

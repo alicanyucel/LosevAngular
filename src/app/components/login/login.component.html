@@ -12,14 +12,14 @@
                 <form #form="ngForm" (ngSubmit)="login()">
                     <div class="input-group mb-1">
                         <div class="form-floating">
-                            <input id="loginEmail" type="email" class="form-control" [(ngModel)]="request().userNameOrEmail" name="userNameOrEmail" />
+                            <input id="loginEmail" type="email" class="form-control" [(ngModel)]="request().EmailOrUserName" name="EmailOrUserName" />
                             <label for="loginEmail">Kullanıcı Adı / Mail Adresi</label>
                         </div>
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                     </div>
                     <div class="input-group mb-1">
                         <div class="form-floating">
-                            <input id="loginPassword" type="password" class="form-control" [(ngModel)]="request().password" name="password" />
+                            <input id="loginPassword" type="password" class="form-control" [(ngModel)]="request().Password" name="Password" />
                             <label for="loginPassword">Şifre</label>
                         </div>
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
