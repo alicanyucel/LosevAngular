@@ -1,4 +1,3 @@
-<p>home works!</p>
 <div class="container">
   <h2>{{ username }}'s Passwords</h2>
 
@@ -26,14 +25,19 @@
           <td>
             <div class="d-flex align-items-center">
               <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly class="form-control me-2">
-              <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary">
-                <i class="fa fa-eye"></i>
+              <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary" [title]="pass.show ? 'Gizle' : 'Göster'">
+                <i [class]="pass.show ? 'fa fa-eye-slash me-1' : 'fa fa-eye me-1'"></i>
+                {{ pass.show ? 'Gizle' : 'Göster' }}
               </button>
             </div>
           </td>
           <td>
-            <button (click)="editPass(pass)" class="btn btn-sm btn-warning me-2"><i class="fa fa-edit"></i></button>
-            <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+            <button (click)="editPass(pass)" class="btn btn-sm btn-warning me-2" title="Güncelle">
+              <i class="fa fa-edit me-1"></i>Güncelle
+            </button>
+            <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger" title="Sil">
+              <i class="fa fa-trash me-1"></i>Sil
+            </button>
           </td>
         </tr>
       </tbody>
