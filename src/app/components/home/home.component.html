@@ -7,7 +7,7 @@
         <i class="fa fa-plus me-1"></i>Grup Ekle
       </button>
     </div>
-    
+
     <div class="col-md-10">
       <div class="input-group">
         <input 
@@ -35,20 +35,20 @@
       </div>
     </div>
 
-    <table class="table mb-0">
+    <table class="table mb-0 table-responsive">
       <thead>
         <tr>
-          <th>Pass Name</th>
-          <th>Url</th>
-          <th>Pass</th>
-          <th>Tools</th>
+          <th style="width: 20%;">Pass Name</th>
+          <th style="width: 25%;">Url</th>
+          <th style="width: 30%;">Pass</th>
+          <th style="width: 25%;">Tools</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let pass of group.passwords">
-          <td>{{ pass.name }}</td>
-          <td>{{ pass.url }}</td>
-          <td>
+          <td style="width: 20%;">{{ pass.name }}</td>
+          <td style="width: 25%;">{{ pass.url }}</td>
+          <td style="width: 30%;">
             <div class="d-flex align-items-center">
               <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly class="form-control me-2">
               <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary" [title]="pass.show ? 'Gizle' : 'Göster'">
@@ -57,13 +57,15 @@
               </button>
             </div>
           </td>
-          <td>
-            <button (click)="editPass(pass)" class="btn btn-sm btn-warning me-2" title="Güncelle">
-              <i class="fa fa-edit me-1"></i>Güncelle
-            </button>
-            <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger" title="Sil">
-              <i class="fa fa-trash me-1"></i>Sil
-            </button>
+          <td style="width: 25%;">
+            <div class="d-flex flex-wrap gap-1">
+              <button (click)="editPass(pass)" class="btn btn-sm btn-warning" title="Güncelle">
+                <i class="fa fa-edit me-1"></i>Güncelle
+              </button>
+              <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger" title="Sil">
+                <i class="fa fa-trash me-1"></i>Sil
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
