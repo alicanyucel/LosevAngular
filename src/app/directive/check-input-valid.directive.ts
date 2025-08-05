@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
   selector: '[appCheckInputValid]'
 })
 export class CheckInputValidDirective {
-
+  
   @Input() appCheckInputValid:any;
   
   constructor(
