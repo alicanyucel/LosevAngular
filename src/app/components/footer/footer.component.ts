@@ -241,25 +241,16 @@ export default class FooterComponent {
 
   openLinkedIn(event: Event): void {
     event.preventDefault();
-    this.sweetAlert.info(
-      'LinkedIn Profili',
-      'LinkedIn: https://www.linkedin.com/in/ali-can-y%C3%BCcel-062b6517a/'
-    );
+    window.open('https://www.linkedin.com/in/ali-can-y%C3%BCcel-062b6517a/', '_blank');
   }
 
   openGitHub(event: Event): void {
     event.preventDefault();
-    this.sweetAlert.info(
-      'GitHub Profili',
-      'GitHub: github.com/alicanyucel'
-    );
+    window.open('https://github.com/alicanyucel', '_blank');
   }
 
   openWebSite(event: Event): void {
     event.preventDefault();
-    this.sweetAlert.info(
-      'Kişisel web sitesi',
-      'https://alicanyucel.com.tr/'
-    );
+    window.open('https://alicanyucel.com.tr/', '_blank');
   }
 }
