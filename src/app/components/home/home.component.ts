@@ -8,12 +8,13 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { CookieService } from '../../services/cookie.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { PasswordStrengthComponent } from '../password-strength/password-strength.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, FormsModule, SearchGroupPipe, TranslatePipe, BreadcrumbComponent]
+  imports: [CommonModule, FormsModule, SearchGroupPipe, TranslatePipe, BreadcrumbComponent, PasswordStrengthComponent]
 })
 export class HomeComponent {
   private sweetAlert = inject(SweetAlertService);
@@ -25,13 +26,13 @@ export class HomeComponent {
   searchTerm = '';
   isDarkTheme = false;
   languages = LANGUAGES;
+  currentPassword = '';
+  showTestPassword = false; // Test parolasını göster/gizle
 
   constructor() {
-    // Breadcrumb'u ayarla
+
     this.breadcrumbService.reset();
     this.breadcrumbService.add('passwords', '/home', 'key');
-    
-    // Cookie'den tema durumunu oku, yoksa LocalStorage'dan oku
     const savedThemeFromCookie = this.cookieService.getCookie('user_theme');
     const savedThemeFromStorage = localStorage.getItem('theme');
     
@@ -39,11 +40,15 @@ export class HomeComponent {
       this.isDarkTheme = savedThemeFromCookie === 'dark';
     } else if (savedThemeFromStorage) {
       this.isDarkTheme = savedThemeFromStorage === 'dark';
-      // Storage'dan cookie'ye geçir
       this.cookieService.setCookie('user_theme', savedThemeFromStorage, 365);
     }
     
     this.applyTheme();
+  }
+
+  onPasswordGenerated(password: string) {
+    this.currentPassword = password;
+    this.sweetAlert.toast(this.translate('passwordGenerated'), 'success');
   }
 
   groups = [
@@ -86,23 +91,94 @@ export class HomeComponent {
   }
 
   addPass(group: any) {
-    this.sweetAlert.input(this.translate('passName'), this.translate('enterPasswordName')).then((nameResult: any) => {
-      if (nameResult.isConfirmed && nameResult.value) {
-        this.sweetAlert.input(this.translate('url'), this.translate('enterUrl')).then((urlResult: any) => {
-          if (urlResult.isConfirmed && urlResult.value) {
-            this.sweetAlert.input(this.translate('password'), this.translate('enterPassword'), '', 'password').then((passResult: any) => {
-              if (passResult.isConfirmed && passResult.value) {
-                group.passwords.push({ 
-                  name: nameResult.value.trim(), 
-                  url: urlResult.value.trim(), 
-                  password: passResult.value, 
-                  show: false 
-                });
-                this.sweetAlert.toast(this.translate('passwordAdded'), 'success');
+    const html = `
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="swal-input-name" class="form-label">${this.translate('passName')}</label>
+          <input id="swal-input-name" class="form-control" placeholder="${this.translate('enterPasswordName')}" />
+        </div>
+        <div class="col-12">
+          <label for="swal-input-url" class="form-label">${this.translate('url')}</label>
+          <input id="swal-input-url" class="form-control" placeholder="${this.translate('enterUrl')}" />
+        </div>
+        <div class="col-12">
+          <label for="swal-input-password" class="form-label">${this.translate('password')}</label>
+          <div class="input-group">
+            <input id="swal-input-password" type="password" class="form-control" placeholder="${this.translate('enterPassword')}" />
+            <button type="button" class="btn btn-outline-secondary" onclick="
+              const input = document.getElementById('swal-input-password');
+              const icon = this.querySelector('i');
+              if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa fa-eye-slash';
+              } else {
+                input.type = 'password';
+                icon.className = 'fa fa-eye';
               }
-            });
+            ">
+              <i class="fa fa-eye"></i>
+            </button>
+          </div>
+          <div id="password-strength-indicator" class="mt-2"></div>
+        </div>
+      </div>
+      <script>
+        document.getElementById('swal-input-password').addEventListener('input', function() {
+          const password = this.value;
+          const indicator = document.getElementById('password-strength-indicator');
+          
+          if (password) {
+            let score = 0;
+            let color = '#dc3545';
+            let label = '${this.translate('weak')}';
+            
+            // Basit parola gücü kontrolü
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            if (score >= 4) {
+              color = '#198754';
+              label = '${this.translate('strong')}';
+            } else if (score >= 3) {
+              color = '#fd7e14';
+              label = '${this.translate('medium')}';
+            }
+            
+            const percentage = (score / 5) * 100;
+            
+            indicator.innerHTML = \`
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <small>${this.translate('passwordStrength')}:</small>
+                <small style="color: \${color}; font-weight: bold;">\${label}</small>
+              </div>
+              <div class="progress" style="height: 6px;">
+                <div class="progress-bar" style="width: \${percentage}%; background-color: \${color};"></div>
+              </div>
+            \`;
+          } else {
+            indicator.innerHTML = '';
           }
         });
+      </script>
+    `;
+    
+    this.sweetAlert.customInput(
+      this.translate('addPassInGroup'), 
+      html,
+      this.translate('save'),
+      this.translate('cancel')
+    ).then((result: any) => {
+      if (result.isConfirmed && result.value) {
+        group.passwords.push({ 
+          name: result.value.name, 
+          url: result.value.url, 
+          password: result.value.password, 
+          show: false 
+        });
+        this.sweetAlert.toast(this.translate('passwordAdded'), 'success');
       }
     });
   }
@@ -163,7 +239,6 @@ export class HomeComponent {
     this.isDarkTheme = !this.isDarkTheme;
     this.applyTheme();
     const themeValue = this.isDarkTheme ? 'dark' : 'light';
-    // Hem cookie'ye hem localStorage'a kaydet
     this.cookieService.setCookie('user_theme', themeValue, 365); // 1 yıl
     localStorage.setItem('theme', themeValue);
     this.sweetAlert.toast(`${this.isDarkTheme ? this.translate('dark') : this.translate('light')} ${this.translate('themeChanged')}`, 'info');
@@ -192,7 +267,6 @@ export class HomeComponent {
     return this.i18n.translate(key);
   }
 
-  // Debug: Cookie'leri göster (geliştirme amaçlı)
   showCookies() {
     const cookies = this.cookieService.getAllCookies();
     console.log('Tüm Cookie\'ler:', cookies);
@@ -202,7 +276,6 @@ export class HomeComponent {
       return;
     }
     
-    // Cookie'leri formatla
     let cookieDetails = `${this.translate('cookieCount')}: ${Object.keys(cookies).length}\n\n`;
     
     for (const [name, value] of Object.entries(cookies)) {
@@ -213,7 +286,6 @@ export class HomeComponent {
     this.sweetAlert.info(this.translate('cookieDetails'), cookieDetails);
   }
 
-  // Cookie'leri temizle
   clearCookies() {
     this.sweetAlert.confirm(this.translate('clearCookies'), 'Tüm cookie\'ler silinecek. Emin misiniz?', this.translate('delete'), this.translate('cancel')).then((result: any) => {
       if (result.isConfirmed) {

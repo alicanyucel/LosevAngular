@@ -98,7 +98,24 @@ export class I18nService {
       'close': 'Kapat',
       
       // Breadcrumb
-      'home': 'Ana Sayfa'
+      'home': 'Ana Sayfa',
+      
+      // Password Strength
+      'weak': 'Zayıf',
+      'medium': 'Orta',
+      'strong': 'Güçlü',
+      'veryStrong': 'Çok Güçlü',
+      'passwordStrength': 'Parola Gücü',
+      'generatePassword': 'Parola Üret',
+      'enterPasswordHere': 'Parola girin',
+      'passwordLength': 'En az 8 karakter kullanın',
+      'passwordUppercase': 'Büyük harf ekleyin',
+      'passwordLowercase': 'Küçük harf ekleyin',
+      'passwordNumber': 'Sayı ekleyin',
+      'passwordSpecialChar': 'Özel karakter ekleyin (!@#$%)',
+      'suggestions': 'Öneriler',
+      'test': 'Test',
+      'passwordGenerated': 'Parola oluşturuldu!'
     },
     en: {
       // Header
@@ -178,7 +195,24 @@ export class I18nService {
       'close': 'Close',
       
       // Breadcrumb
-      'home': 'Home'
+      'home': 'Home',
+      
+      // Password Strength
+      'weak': 'Weak',
+      'medium': 'Medium',
+      'strong': 'Strong',
+      'veryStrong': 'Very Strong',
+      'passwordStrength': 'Password Strength',
+      'generatePassword': 'Generate Password',
+      'enterPasswordHere': 'Enter password',
+      'passwordLength': 'Use at least 8 characters',
+      'passwordUppercase': 'Add uppercase letter',
+      'passwordLowercase': 'Add lowercase letter',
+      'passwordNumber': 'Add number',
+      'passwordSpecialChar': 'Add special character (!@#$%)',
+      'suggestions': 'Suggestions',
+      'test': 'Test',
+      'passwordGenerated': 'Password generated!'
     }
   };
 

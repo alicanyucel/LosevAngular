@@ -130,4 +130,29 @@ export class SweetAlertService {
       }
     });
   }
+
+  customInput(title: string, html: string, confirmButtonText: string = 'Tamam', cancelButtonText: string = 'İptal') {
+    return Swal.fire({
+      title: title,
+      html: html,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `<i class="fa fa-save me-2"></i>${confirmButtonText}`,
+      cancelButtonText: `<i class="fa fa-times me-2"></i>${cancelButtonText}`,
+      allowHtml: true,
+      preConfirm: () => {
+        const name = (document.getElementById('swal-input-name') as HTMLInputElement)?.value;
+        const url = (document.getElementById('swal-input-url') as HTMLInputElement)?.value;
+        const password = (document.getElementById('swal-input-password') as HTMLInputElement)?.value;
+        
+        if (!name || !url || !password) {
+          Swal.showValidationMessage(this.i18n.translate('fieldRequired'));
+          return false;
+        }
+        
+        return { name: name.trim(), url: url.trim(), password: password };
+      }
+    });
+  }
 }

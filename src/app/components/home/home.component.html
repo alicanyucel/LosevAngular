@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid mt-4 pb-5">
   <app-breadcrumb></app-breadcrumb>
   
   <div class="d-flex justify-content-between align-items-center mb-3">
@@ -58,7 +58,46 @@
     </div>
   </div>
 
-  <div *ngFor="let group of groups | searchGroup:searchTerm" class="card mt-3">
+  <!-- Parola Gücü Test Alanı -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <div class="card card-sm">
+        <div class="card-header py-2">
+          <h6 class="card-title mb-0 small">
+            <i class="fa fa-shield-alt me-1"></i>
+            {{ 'passwordStrength' | translate }} {{ 'test' | translate }}
+          </h6>
+        </div>
+        <div class="card-body py-2">
+          <div class="mb-2">
+            <label for="testPassword" class="form-label small">{{ 'password' | translate }}:</label>
+            <div class="input-group input-group-sm">
+              <input 
+                id="testPassword"
+                [type]="showTestPassword ? 'text' : 'password'"
+                class="form-control" 
+                [placeholder]="'enterPasswordHere' | translate"
+                [(ngModel)]="currentPassword">
+              <button 
+                (click)="showTestPassword = !showTestPassword" 
+                class="btn btn-outline-secondary"
+                type="button">
+                <i [class]="showTestPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+              </button>
+            </div>
+          </div>
+          <app-password-strength 
+            [password]="currentPassword" 
+            [showSuggestions]="true"
+            [showGenerateButton]="true"
+            (passwordGenerated)="onPasswordGenerated($event)">
+          </app-password-strength>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let group of groups | searchGroup:searchTerm" class="card mt-3 mb-5">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>{{ group.name }}</span>
       <div>

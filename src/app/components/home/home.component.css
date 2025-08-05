@@ -18,6 +18,24 @@ input {
   color: #fff;
 }
 
+/* Compact Card Styles */
+.card-sm {
+  font-size: 0.875rem;
+}
+
+.card-sm .card-header {
+  padding: 0.5rem 0.75rem;
+}
+
+.card-sm .card-body {
+  padding: 0.5rem 0.75rem;
+}
+
+.card-sm .form-label {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
 [data-bs-theme="dark"] .table {
   color: #fff;
 }
