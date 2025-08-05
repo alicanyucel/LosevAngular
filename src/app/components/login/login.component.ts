@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FlexiButtonComponent } from 'flexi-button';
 import { api } from '../../constanst/constants';
 import { FlexiToastService } from 'flexi-toast';
+import { SweetAlertService } from '../../services/sweet-alert.service';
 import { lastValueFrom } from 'rxjs';
 import { LoginResponseModel } from '../../models/login.reponse.model';
 
@@ -22,6 +23,7 @@ export default class LoginComponent {
   readonly #http = inject(HttpClient);
   readonly #router = inject(Router);
   readonly #toast = inject(FlexiToastService);
+  readonly #sweetAlert = inject(SweetAlertService);
 
   async login(){
     if(!this.loading()){
@@ -33,9 +35,9 @@ export default class LoginComponent {
           localStorage.setItem("accessToken", res.data.token);
           localStorage.setItem("refreshToken", res.data.refreshToken);
           this.#router.navigateByUrl("/home");
-          this.#toast.showToast("Başarılı!","Giriş başarılı","success");
+          this.#sweetAlert.success("Başarılı!", "Giriş başarılı");
         } else {
-          this.#toast.showToast("Hata!","Sunucudan geçersiz yanıt","error");
+          this.#sweetAlert.error("Hata!", "Sunucudan geçersiz yanıt");
         }
       } catch (error: any) {
         console.error('Login error:', error);
@@ -51,7 +53,7 @@ export default class LoginComponent {
           errorMessage = "Sunucu hatası";
         }
         
-        this.#toast.showToast("Hata!", errorMessage, "error");
+        this.#sweetAlert.error("Hata!", errorMessage);
       } finally {
         this.loading.set(false);
       }
