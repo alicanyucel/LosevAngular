@@ -21,7 +21,7 @@ import { Router, RouterLink } from '@angular/router';
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      min-height: calc(100vh - 100px); /* Footer için alan bırak */
       padding: 20px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
