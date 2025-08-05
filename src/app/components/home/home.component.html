@@ -1,0 +1,40 @@
+<p>home works!</p>
+<div class="container">
+  <h2>{{ username }}'s Passwords</h2>
+
+  <button (click)="createNewGroup()" class="btn btn-primary">Create New Group +</button>
+
+  <div *ngFor="let group of groups" class="card mt-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>{{ group.name }}</span>
+      <button (click)="addPass(group)" class="btn btn-sm btn-info">Add Pass in {{ group.name }} Group +</button>
+    </div>
+
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Pass Name</th>
+          <th>Url</th>
+          <th>Pass</th>
+          <th>Tools</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pass of group.passwords">
+          <td>{{ pass.name }}</td>
+          <td>{{ pass.url }}</td>
+          <td>
+            <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly>
+            <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary">
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button (click)="editPass(pass)" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
+            <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
