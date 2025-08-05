@@ -36,7 +36,6 @@ export default class LoginComponent {
         'Auth/Login',
         this.request(),
         (res: LoginResponseModel) => {
-          // Başarılı giriş
           if(res && res.token) {
             localStorage.setItem("token", res.token);
             localStorage.setItem("refreshToken", res.refreshToken);
@@ -55,7 +54,6 @@ export default class LoginComponent {
           this.loading.set(false);
         },
         () => {
-          // Hata durumu
           this.loading.set(false);
         }
       );
