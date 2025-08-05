@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs';
 @Component({
   imports: [RouterLink, FormsModule, FlexiButtonComponent],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
