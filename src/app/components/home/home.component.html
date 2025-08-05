@@ -24,13 +24,15 @@
           <td>{{ pass.name }}</td>
           <td>{{ pass.url }}</td>
           <td>
-            <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly>
-            <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary">
-              <i class="fa fa-eye"></i>
-            </button>
+            <div class="d-flex align-items-center">
+              <input [type]="pass.show ? 'text' : 'password'" [value]="pass.password" readonly class="form-control me-2">
+              <button (click)="toggleShow(pass)" class="btn btn-sm btn-secondary">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
           </td>
           <td>
-            <button (click)="editPass(pass)" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
+            <button (click)="editPass(pass)" class="btn btn-sm btn-warning me-2"><i class="fa fa-edit"></i></button>
             <button (click)="deletePass(group, pass)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
           </td>
         </tr>
