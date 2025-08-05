@@ -1,16 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SweetAlertService } from '../../services/sweet-alert.service';
+import { SearchGroupPipe } from '../../pipes/search-group.pipe';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, FormsModule, SearchGroupPipe]
 })
 export class HomeComponent {
   private sweetAlert = inject(SweetAlertService);
   username = 'Test';
+  searchTerm = '';
 
   groups = [
     {

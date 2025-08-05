@@ -1,12 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'searchGroup'
+  name: 'searchGroup',
+  standalone: true
 })
 export class SearchGroupPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(groups: any[], searchTerm: string): any[] {
+    if (!groups || !searchTerm) {
+      return groups;
+    }
+    
+    return groups.filter(group => 
+      group.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
 
 }

@@ -1,9 +1,24 @@
 <div class="container">
   <h2>{{ username }}'s Passwords</h2>
 
-  <button (click)="createNewGroup()" class="btn btn-primary">Create New Group +</button>
+  <div class="row mb-3">
+    <div class="col-md-2">
+      <button (click)="createNewGroup()" class="btn btn-primary w-100">
+        <i class="fa fa-plus me-1"></i>Grup Ekle
+      </button>
+    </div>
+    <div class="col-md-10">
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Grup ara..." 
+          [(ngModel)]="searchTerm">
+      </div>
+    </div>
+  </div>
 
-  <div *ngFor="let group of groups" class="card mt-3">
+  <div *ngFor="let group of groups | searchGroup:searchTerm" class="card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>{{ group.name }}</span>
       <div>
