@@ -91,3 +91,26 @@ body.login-page {
     padding: 10px;
   }
 }
+
+/* Password toggle styles */
+.password-toggle {
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.password-toggle:hover {
+  background-color: #e9ecef !important;
+  color: #495057;
+}
+
+.password-toggle:active {
+  transform: scale(0.95);
+}
+
+.password-toggle .bi {
+  font-size: 1.1rem;
+}
+
+.password-toggle:hover .bi {
+  color: #007bff;
+}

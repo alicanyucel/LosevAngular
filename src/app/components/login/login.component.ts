@@ -17,11 +17,16 @@ import { LoginResponseModel } from '../../models/login.reponse.model';
 export default class LoginComponent {
   readonly request = signal<{EmailOrUserName: string, Password: string}>({EmailOrUserName: "", Password: ""});
   readonly loading = signal<boolean>(false);
+  readonly showPassword = signal<boolean>(false);
 
   readonly #http = inject(HttpService);
   readonly #router = inject(Router);
   readonly #toast = inject(FlexiToastService);
   readonly #sweetAlert = inject(SweetAlertService);
+
+  togglePasswordVisibility(): void {
+    this.showPassword.set(!this.showPassword());
+  }
 
   login(){
     if(!this.loading()){

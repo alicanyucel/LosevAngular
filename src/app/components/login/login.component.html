@@ -19,10 +19,12 @@
                     </div>
                     <div class="input-group mb-1">
                         <div class="form-floating">
-                            <input id="loginPassword" type="password" class="form-control" [(ngModel)]="request().Password" name="Password" />
+                            <input id="loginPassword" [type]="showPassword() ? 'text' : 'password'" class="form-control" [(ngModel)]="request().Password" name="Password" />
                             <label for="loginPassword">Şifre</label>
                         </div>
-                        <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+                        <div class="input-group-text password-toggle" (click)="togglePasswordVisibility()" style="cursor: pointer;" title="{{ showPassword() ? 'Şifreyi gizle' : 'Şifreyi göster' }}">
+                            <span [class]="showPassword() ? 'bi bi-eye-slash' : 'bi bi-eye'"></span>
+                        </div>
                     </div>
                     <div class="form-group d-grid gap-2">
                         <flexi-button btnType="submit" btnSize="medium" btnColor="primary" [loading]="loading()" loadingText="Giriş Yapılıyor..." btnText="Giriş Yap" btnWidth="100%" btnIcon="lock"/>
