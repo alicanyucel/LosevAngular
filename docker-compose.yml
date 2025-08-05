@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  losev-angular:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    container_name: losev-angular-app
+    
+  # Development service (optional)
+  losev-angular-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    container_name: losev-angular-dev
+    profiles:
+      - dev
