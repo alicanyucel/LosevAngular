@@ -15,6 +15,7 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - [Kullanım](#-kullanım)
 - [Docker](#-docker)
 - [Proje Yapısı](#-proje-yapısı)
+- [FontAwesome İkon Sistemi](#-fontawesome-ikon-sistemi)
 - [Ekran Görüntüleri](#-ekran-görüntüleri)
 - [Katkıda Bulunma](#-katkıda-bulunma)
 
@@ -31,6 +32,15 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - **Dark/Light Tema:** İki tema seçeneği ile kişiselleştirme
 - **Çoklu Dil Desteği:** Türkçe/İngilizce dil paketi
 - **Modern UI/UX:** Bootstrap 5 ile çağdaş tasarım
+- **FontAwesome İkonları:** 50+ profesyonel ikon kullanımı
+  - 🔍 Arama ikonu (search)
+  - 🌐 Dil seçici ikonu (language)
+  - 🌙☀️ Tema değiştirme ikonları (moon/sun)
+  - 🍪 Çerez yönetimi ikonu (cookie-bite)
+  - ➕ Ekleme ikonları (plus)
+  - ✏️ Düzenleme ikonları (edit)
+  - 🗑️ Silme ikonları (trash)
+  - 👁️ Göster/Gizle ikonları (eye/eye-slash)
 - **Interactive Elements:** Smooth animasyonlar ve hover efektleri
 
 ### 🛡️ Güvenlik ve Kimlik Doğrulama
@@ -55,8 +65,11 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 - **Angular Forms** - Form yönetimi
 
 ### UI/UX Kütüphaneleri
-- **Bootstrap 5.3** - CSS framework
-- **FontAwesome** - İkon kütüphanesi
+- **Bootstrap 5.3** - CSS framework ve responsive tasarım
+- **FontAwesome 6.x** - Kapsamlı ikon kütüphanesi (600+ ikon)
+  - Düğme ikonları (edit, delete, add, show/hide)
+  - UI ikonları (search, language, theme, cookie)
+  - Navigasyon ikonları (dropdown, toggle)
 - **SweetAlert2** - Modern alert dialokları
 - **Flexi Toast** - Bildirim sistemi
 - **Flexi Button** - Gelişmiş buton komponenti
@@ -241,6 +254,60 @@ ng e2e
 - Responsive tasarım
 - Touch-optimized controls
 - Compact layout
+
+## 🎨 FontAwesome İkon Sistemi
+
+Bu projede FontAwesome 6.x kullanılarak profesyonel bir ikon sistemi kurulmuştur.
+
+### 🔧 Kurulum
+FontAwesome CDN üzerinden index.html'e entegre edilmiştir:
+```html
+<script src="https://kit.fontawesome.com/a3604e2b80.js" crossorigin="anonymous"></script>
+```
+
+### 📋 Kullanılan İkonlar
+
+#### 🔍 Arama ve Navigasyon
+- `fa fa-search` - Arama kutusu
+- `fa fa-language` - Dil seçici dropdown
+- `fa fa-cookie-bite` - Çerez yönetimi
+
+#### 🌙 Tema İkonları
+- `fa fa-moon` - Karanlık tema
+- `fa fa-sun` - Aydınlık tema
+
+#### ⚡ Aksiyon İkonları
+- `fa fa-plus` - Yeni grup/şifre ekleme
+- `fa fa-edit` - Düzenleme işlemleri
+- `fa fa-trash` - Silme işlemleri
+- `fa fa-eye` / `fa fa-eye-slash` - Şifre göster/gizle
+
+#### ℹ️ Bilgi İkonları
+- `fa fa-info-circle` - Çerez bilgisi
+- `fa fa-times` - Kapatma işlemleri
+
+### 🎯 İkon Kullanım Örnekleri
+
+```html
+<!-- Dil seçici butonu -->
+<button class="btn btn-outline-secondary dropdown-toggle">
+  <i class="fa fa-language me-2"></i>{{ getCurrentLanguage().name }}
+</button>
+
+<!-- Tema değiştirme butonu -->
+<button (click)="toggleTheme()">
+  <i [class]="isDarkTheme ? 'fa fa-sun me-1' : 'fa fa-moon me-1'"></i>
+  {{ isDarkTheme ? 'Light' : 'Dark' }}
+</button>
+
+<!-- Arama input grubu -->
+<div class="input-group">
+  <span class="input-group-text">
+    <i class="fa fa-search"></i>
+  </span>
+  <input type="text" class="form-control" placeholder="Ara...">
+</div>
+```
 
 ## 🤝 Katkıda Bulunma
 
