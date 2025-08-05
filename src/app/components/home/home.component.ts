@@ -14,6 +14,14 @@ export class HomeComponent {
   private sweetAlert = inject(SweetAlertService);
   username = 'Test';
   searchTerm = '';
+  isDarkTheme = false;
+
+  constructor() {
+    // LocalStorage'dan tema durumunu oku
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+    this.applyTheme();
+  }
 
   groups = [
     {
@@ -126,5 +134,22 @@ export class HomeComponent {
         }
       }
     });
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+    this.sweetAlert.toast(`${this.isDarkTheme ? 'Dark' : 'Light'} tema aktif!`, 'info');
+  }
+
+  applyTheme() {
+    if (this.isDarkTheme) {
+      document.body.setAttribute('data-bs-theme', 'dark');
+      document.body.classList.add('bg-dark', 'text-light');
+    } else {
+      document.body.removeAttribute('data-bs-theme');
+      document.body.classList.remove('bg-dark', 'text-light');
+    }
   }
 }

@@ -1,6 +1,60 @@
 .container {
   margin-top: 20px;
 }
+
 input {
   max-width: 150px;
+}
+
+/* Dark Theme Styles */
+[data-bs-theme="dark"] .card {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .card-header {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .table {
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .table th,
+[data-bs-theme="dark"] .table td {
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .table thead th {
+  background-color: #495057;
+}
+
+[data-bs-theme="dark"] .form-control {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .form-control:focus {
+  background-color: #495057;
+  border-color: #0d6efd;
+  color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+[data-bs-theme="dark"] .input-group-text {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #fff;
+}
+
+/* Theme toggle button animation */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
 }
