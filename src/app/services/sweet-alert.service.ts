@@ -101,4 +101,24 @@ export class SweetAlertService {
   close() {
     Swal.close();
   }
+
+  input(title: string, inputPlaceholder: string = '', inputValue: string = '', inputType: string = 'text') {
+    return Swal.fire({
+      title: title,
+      input: inputType,
+      inputPlaceholder: inputPlaceholder,
+      inputValue: inputValue,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Kaydet',
+      cancelButtonText: 'İptal',
+      inputValidator: (value: any) => {
+        if (!value) {
+          return 'Bu alan boş bırakılamaz!'
+        }
+        return null;
+      }
+    });
+  }
 }

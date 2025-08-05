@@ -6,7 +6,17 @@
   <div *ngFor="let group of groups" class="card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>{{ group.name }}</span>
-      <button (click)="addPass(group)" class="btn btn-sm btn-info">Add Pass in {{ group.name }} Group +</button>
+      <div>
+        <button (click)="addPass(group)" class="btn btn-sm btn-info me-2">
+          <i class="fa fa-plus me-1"></i>Add Pass in {{ group.name }} Group
+        </button>
+        <button (click)="editGroup(group)" class="btn btn-sm btn-warning me-2" title="Grubu Güncelle">
+          <i class="fa fa-edit me-1"></i>Güncelle
+        </button>
+        <button (click)="deleteGroup(group)" class="btn btn-sm btn-danger" title="Grubu Sil">
+          <i class="fa fa-trash me-1"></i>Sil
+        </button>
+      </div>
     </div>
 
     <table class="table mb-0">

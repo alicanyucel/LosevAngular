@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SweetAlertService } from '../../services/sweet-alert.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class HomeComponent {
+  private sweetAlert = inject(SweetAlertService);
   username = 'Test';
 
   groups = [
@@ -33,39 +35,93 @@ export class HomeComponent {
 
   toggleShow(pass: any) {
     pass.show = !pass.show;
+    if (pass.show) {
+      this.sweetAlert.toast('Şifre gösterildi', 'info');
+    } else {
+      this.sweetAlert.toast('Şifre gizlendi', 'info');
+    }
   }
 
   createNewGroup() {
-    const groupName = prompt('Enter group name');
-    if (groupName) {
-      this.groups.push({ name: groupName, passwords: [] });
-    }
+    this.sweetAlert.input('Yeni Grup Oluştur', 'Grup adını girin').then((result: any) => {
+      if (result.isConfirmed && result.value) {
+        this.groups.push({ name: result.value.trim(), passwords: [] });
+        this.sweetAlert.toast('Yeni grup oluşturuldu!', 'success');
+      }
+    });
   }
 
   addPass(group: any) {
-    const passName = prompt('Enter pass name');
-    const url = prompt('Enter url');
-    const password = prompt('Enter password');
-    if (passName && url && password) {
-      group.passwords.push({ name: passName, url, password, show: false });
-    }
+    this.sweetAlert.input('Şifre Adı', 'Şifre adını girin').then((nameResult: any) => {
+      if (nameResult.isConfirmed && nameResult.value) {
+        this.sweetAlert.input('URL', 'URL girin').then((urlResult: any) => {
+          if (urlResult.isConfirmed && urlResult.value) {
+            this.sweetAlert.input('Şifre', 'Şifreyi girin', '', 'password').then((passResult: any) => {
+              if (passResult.isConfirmed && passResult.value) {
+                group.passwords.push({ 
+                  name: nameResult.value.trim(), 
+                  url: urlResult.value.trim(), 
+                  password: passResult.value, 
+                  show: false 
+                });
+                this.sweetAlert.toast('Yeni şifre eklendi!', 'success');
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   editPass(pass: any) {
-    const newName = prompt('Edit pass name', pass.name);
-    const newUrl = prompt('Edit url', pass.url);
-    const newPassword = prompt('Edit password', pass.password);
-    if (newName !== null && newUrl !== null && newPassword !== null) {
-      pass.name = newName;
-      pass.url = newUrl;
-      pass.password = newPassword;
-    }
+    this.sweetAlert.input('Şifre Adını Düzenle', 'Şifre adını girin', pass.name).then((nameResult: any) => {
+      if (nameResult.isConfirmed && nameResult.value) {
+        this.sweetAlert.input('URL Düzenle', 'URL girin', pass.url).then((urlResult: any) => {
+          if (urlResult.isConfirmed && urlResult.value) {
+            this.sweetAlert.input('Şifreyi Düzenle', 'Şifreyi girin', pass.password, 'password').then((passResult: any) => {
+              if (passResult.isConfirmed && passResult.value) {
+                pass.name = nameResult.value.trim();
+                pass.url = urlResult.value.trim();
+                pass.password = passResult.value;
+                this.sweetAlert.toast('Şifre güncellendi!', 'success');
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   deletePass(group: any, pass: any) {
-    const index = group.passwords.indexOf(pass);
-    if (index !== -1) {
-      group.passwords.splice(index, 1);
-    }
+    this.sweetAlert.deleteConfirm(`"${pass.name}" şifresini silmek istediğinizden emin misiniz?`, 'Bu işlem geri alınamaz!').then((result: any) => {
+      if (result.isConfirmed) {
+        const index = group.passwords.indexOf(pass);
+        if (index !== -1) {
+          group.passwords.splice(index, 1);
+          this.sweetAlert.toast('Şifre silindi!', 'success');
+        }
+      }
+    });
+  }
+
+  editGroup(group: any) {
+    this.sweetAlert.input('Grup Adını Düzenle', 'Grup adını girin', group.name).then((result: any) => {
+      if (result.isConfirmed && result.value) {
+        group.name = result.value.trim();
+        this.sweetAlert.toast('Grup adı güncellendi!', 'success');
+      }
+    });
+  }
+
+  deleteGroup(group: any) {
+    this.sweetAlert.deleteConfirm(`"${group.name}" grubunu silmek istediğinizden emin misiniz?`, 'Bu işlem geri alınamaz ve tüm şifreler silinecek!').then((result: any) => {
+      if (result.isConfirmed) {
+        const index = this.groups.indexOf(group);
+        if (index !== -1) {
+          this.groups.splice(index, 1);
+          this.sweetAlert.toast('Grup silindi!', 'success');
+        }
+      }
+    });
   }
 }
