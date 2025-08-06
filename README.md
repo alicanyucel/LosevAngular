@@ -150,7 +150,7 @@ Modern ve güvenli bir Angular tabanlı şifre yönetim uygulaması. Bu proje, k
 
 ### 🔑 Giriş
 - Uygulama login sayfası ile başlar
-- Test için herhangi bir kullanıcı adı ve şifre kullanabilirsiniz
+- Test için kullanıcı adı admin şifre 1 yazarak  backendi calıştıdkktan sonra auth epye sitek atar bağlanır.
 - Başarılı girişten sonra ana sayfaya yönlendirilirsiniz
 
 ### 🏠 Ana Sayfa Özellikleri
